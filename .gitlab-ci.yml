@@ -39,7 +39,7 @@ build:
       - .gradle
   only:
     refs:
-      - master
+      - main
 
 
 test:
@@ -53,7 +53,7 @@ test:
       - .gradle
   only:
     refs:
-      - master      
+      - main      
 
 dockerBuild:
   stage: dockerBuild
@@ -65,4 +65,4 @@ dockerBuild:
     - ./buildDocker.sh
   only:
     refs:
-      - master
+      - main
