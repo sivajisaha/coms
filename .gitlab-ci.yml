@@ -37,6 +37,10 @@ build:
     paths:
       - build
       - .gradle
+  only:
+    refs:
+      - master
+
 
 test:
   stage: test
@@ -47,10 +51,18 @@ test:
     paths:
       - build
       - .gradle
+  only:
+    refs:
+      - master      
 
 dockerBuild:
   stage: dockerBuild
   image: docker:20
+  before_script:
+    - docker login -u sibendu -p P@ssw0rd12
   script: 
     - chmod +x ./buildDocker.sh
     - ./buildDocker.sh
+  only:
+    refs:
+      - master
