@@ -51,6 +51,10 @@ test:
     paths:
       - build
       - .gradle
+  artifacts:
+    paths:
+        - coms-ui/build/libs/coms-ui-0.0.1-SNAPSHOT.jar
+        - coms-customer-api/build/libs/coms-customer-api-0.0.1-SNAPSHOT.jar
   only:
     refs:
       - main      
