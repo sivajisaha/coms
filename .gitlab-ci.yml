@@ -58,6 +58,8 @@ test:
 dockerBuild:
   stage: dockerBuild
   image: docker:20
+  services:
+    - docker:dind  
   before_script:
     - docker login -u sibendu -p P@ssw0rd12
   script: 
