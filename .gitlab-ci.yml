@@ -23,7 +23,7 @@ before_script:
 stages:
   - build
   - test
-  - docker
+  - dockerBuild
 #  - sonarqube
 #  - deploy
 
@@ -48,10 +48,9 @@ test:
       - build
       - .gradle
 
-docker:
-  stage: docker
-  image: 
-    name: docker:stable
+dockerBuild:
+  stage: dockerBuild
+  image: docker:20
   script: 
     - chmod +x ./buildDocker.sh
     - ./buildDocker.sh
