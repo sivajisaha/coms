@@ -1,0 +1,46 @@
+gradlew build
+gradlew bootJar
+gradlew bootRun
+java -jar coms-customer-api-0.0.1-SNAPSHOT.jar
+CREATE TABLE customer (
+    customer_id  SERIAL PRIMARY KEY,
+    account_number varchar(40) NOT NULL,
+    first_name varchar(40) NOT NULL,
+    last_name varchar(40) NOT NULL,
+    company_name varchar(40) NOT NULL,
+	bill_to_id integer,
+	ship_to_id integer
+);
+grant all privileges on database coms_db to comsdbuser ;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO comsdbuser;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO comsdbuser;
+--------------------------------
+cd E:\code\coms\coms-customer-api
+
+docker build -t sivajisaha/coms-customer-api:0.1 .
+docker push sivajisaha/coms-customer-api:0.1
+--------------------------------------------
+cd E:\code\coms\coms-ui
+
+docker build -t sivajisaha/coms-ui:0.1 .
+docker push sivajisaha/coms-ui:0.1
+
+--------------------------------
+
+kubectl apply -f ./coms-ui.yaml
+
+minikube service coms-ui --url
+
+kubectl delete deployments coms-ui
+kubectl delete services coms-ui
+
+----------------------------------
+
+kubectl apply -f ./coms-customer-api.yaml
+kubectl delete -f ./coms-customer-api.yaml
+
+minikube service coms-customer-api --url
+kubectl delete deployments coms-customer-api
+kubectl delete services coms-customer-api
+------------------
+

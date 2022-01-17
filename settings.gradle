@@ -1,0 +1,3 @@
+rootProject.name = 'coms'
+include 'coms-ui'
+include 'coms-customer-api'
