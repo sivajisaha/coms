@@ -65,7 +65,7 @@ dockerBuild:
   services:
     - docker:dind  
   before_script:
-    - docker login -u sibendu -p P@ssw0rd12
+    - docker login registry.gitlab.com -u jucoms -p jucoms@1234
   script: 
     - chmod +x ./buildDocker.sh
     - ./buildDocker.sh
