@@ -100,7 +100,8 @@ helm:
   stage: helm
   image: alpine/helm:3.2.1
   script:
-    - helm install COMS ./helm/charts --values=./helm/charts/values.yaml
+#    - helm install COMS ./helm/charts --values=./helm/charts/values.yaml
+    - helm --help
   only:
     refs:
       - main
