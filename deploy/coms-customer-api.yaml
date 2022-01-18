@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: coms-customer-api
-          image: registry.gitlab.com/jucoms/coms/coms-customer-api
+          #image: registry.gitlab.com/jucoms/coms/coms-customer-api
+          image: sibendu/coms-customer-api
           ports:
             - containerPort: 8080
           env:
