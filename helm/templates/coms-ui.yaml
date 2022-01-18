@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: coms-ui
+  name: {{ .Values.applicationName }}-ui
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: coms-ui
+      app: {{ .Values.applicationName }}-ui
   template:
     metadata:
       labels:
-        app: coms-ui
+        app: {{ .Values.applicationName }}-ui
     spec:
       containers:
-        - name: coms-ui
+        - name: {{ .Values.applicationName }}-ui
           image: registry.gitlab.com/jucoms/coms/coms-ui
           ports:
             - containerPort: 8080
@@ -25,10 +25,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: coms-ui
+  name: {{ .Values.applicationName }}-ui
 spec:
   selector:
-    app: coms-ui
+    app: {{ .Values.applicationName }}-ui
   ports:
     - port: 8080
       targetPort: 8080
