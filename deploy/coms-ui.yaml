@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: coms-ui
-          image: registry.gitlab.com/jucoms/coms/coms-ui
+          #image: registry.gitlab.com/jucoms/coms/coms-ui
+          image: sibendu/coms-ui
           ports:
             - containerPort: 8080
           env:
