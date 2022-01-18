@@ -87,6 +87,9 @@ deploy:
   script:
     - kubectl config use-context jucoms/coms:coms-k8s
     - kubectl get pods
+    - kubectl apply -f deploy/postgres-deployment.yaml
+    - kubectl apply -f deploy/coms-customer-api.yaml
+    - kubectl apply -f deploy/coms-ui.yaml
   only:
     refs:
       - main
