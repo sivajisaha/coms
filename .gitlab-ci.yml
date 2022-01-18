@@ -44,6 +44,9 @@ build:
   only:
     refs:
       - main
+    variables:
+      - $TF_VAR_task == "ci"
+
 
 
 test:
@@ -57,7 +60,9 @@ test:
       - .gradle
   only:
     refs:
-      - main      
+      - main
+    variables:
+      - $TF_VAR_task == "ci"     
 
 dockerBuild:
   stage: dockerBuild
@@ -72,6 +77,8 @@ dockerBuild:
   only:
     refs:
       - main
+    variables:
+      - $TF_VAR_task == "ci"
 
 deploy:
   image:
@@ -83,3 +90,5 @@ deploy:
   only:
     refs:
       - main
+    variables:
+      - $TF_VAR_task == "cd"
