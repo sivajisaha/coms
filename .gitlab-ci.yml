@@ -94,3 +94,15 @@ deploy:
       - main
     variables:
       - $TF_VAR_task == "cd" || $TF_VAR_task == "all"
+
+helm:
+  stage: helm
+  image: alpine/helm:3.2.1
+  script:
+    - helm upgrade COMS ./charts --install --values=./charts/values.yaml
+  only:
+    refs:
+      - main
+    variables:
+      - $TF_VAR_task == "helm" || $TF_VAR_task == "all"
+ 
