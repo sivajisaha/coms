@@ -21,11 +21,11 @@ before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
 
 stages:
-  - build
-  - test
-  - dockerBuild
+#  - build
+#  - test
+#  - dockerBuild
 #  - sonarqube
-#  - deploy
+  - deploy
 
 
 build:
@@ -69,6 +69,17 @@ dockerBuild:
   script: 
     - chmod +x ./buildDocker.sh
     - ./buildDocker.sh
+  only:
+    refs:
+      - main
+
+deploy:
+  image:
+    name: bitnami/kubectl:latest
+    entrypoint: [""]
+  script:
+    - kubectl config use-context jucoms/coms:coms-k8s
+    - kubectl get pods
   only:
     refs:
       - main
