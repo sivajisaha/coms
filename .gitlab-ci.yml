@@ -26,6 +26,7 @@ stages:
   - dockerBuild
 #  - sonarqube
   - deploy
+  - helm
 
 
 build:
