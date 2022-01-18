@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: coms-customer-api
+  name: {{ .Values.applicationName }}-customer-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: coms-customer-api
+      app: {{ .Values.applicationName }}-customer-api
   template:
     metadata:
       labels:
-        app: coms-customer-api
+        app: {{ .Values.applicationName }}-customer-api
     spec:
       containers:
-        - name: coms-customer-api
+        - name: {{ .Values.applicationName }}-customer-api
           image: registry.gitlab.com/jucoms/coms/coms-customer-api
           ports:
             - containerPort: 8080
@@ -25,10 +25,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: coms-customer-api
+  name: {{ .Values.applicationName }}-customer-api
 spec:
   selector:
-    app: coms-customer-api
+    app: {{ .Values.applicationName }}-customer-api
   ports:
     - port: 8080
       targetPort: 8080
