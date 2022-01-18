@@ -79,6 +79,7 @@ dockerBuild:
       - $TF_VAR_task == "ci" || $TF_VAR_task == "all"
 
 deploy:
+  stage: deploy
   image:
     name: bitnami/kubectl:latest
     entrypoint: [""]
