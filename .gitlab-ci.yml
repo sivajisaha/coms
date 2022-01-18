@@ -45,9 +45,7 @@ build:
     refs:
       - main
     variables:
-      - $TF_VAR_task == "ci"
-
-
+      - $TF_VAR_task == "ci" || $TF_VAR_task == "all"
 
 test:
   stage: test
@@ -62,7 +60,7 @@ test:
     refs:
       - main
     variables:
-      - $TF_VAR_task == "ci"     
+      - $TF_VAR_task == "ci" || $TF_VAR_task == "all"  
 
 dockerBuild:
   stage: dockerBuild
@@ -78,7 +76,7 @@ dockerBuild:
     refs:
       - main
     variables:
-      - $TF_VAR_task == "ci"
+      - $TF_VAR_task == "ci" || $TF_VAR_task == "all"
 
 deploy:
   image:
@@ -94,4 +92,4 @@ deploy:
     refs:
       - main
     variables:
-      - $TF_VAR_task == "cd"
+      - $TF_VAR_task == "cd" || $TF_VAR_task == "all"
