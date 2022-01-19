@@ -8,7 +8,7 @@
 # https://gradle.org/
 # https://github.com/gradle/gradle
 
-image: gradle:alpine
+image: docker:20
 
 # Disable the Gradle daemon for Continuous Integration servers as correctness
 # is usually a priority over speed in CI environments. Using a fresh
@@ -31,6 +31,7 @@ stages:
 
 build:
   stage: build
+  image: gradle:alpine
   script: gradle clean build
   cache:
     key: "$CI_COMMIT_REF_NAME"
@@ -50,6 +51,7 @@ build:
 
 test:
   stage: test
+  image: gradle:alpine  
   script: gradle test
   cache:
     key: "$CI_COMMIT_REF_NAME"
