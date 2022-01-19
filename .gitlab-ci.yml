@@ -106,5 +106,5 @@ helm:
     refs:
       - main
     variables:
-      - $TF_VAR_task == "helm" || $TF_VAR_task == "all"
+      - $TF_VAR_task == "helm"
  
