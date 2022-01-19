@@ -84,6 +84,8 @@ deploy:
   image:
     name: bitnami/kubectl:latest
     entrypoint: [""]
+  before_script:
+    - docker login registry.gitlab.com -u jucoms -p jucoms@1234
   script:
     - kubectl config use-context jucoms/coms:coms-k8s
     - kubectl get pods
