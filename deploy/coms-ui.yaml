@@ -15,8 +15,6 @@ spec:
       containers:
         - name: coms-ui
           image: registry.gitlab.com/jucoms/coms/coms-ui
-          imagePullSecrets:
-          - name: gitlabregcred
           #image: sibendu/coms-ui
           ports:
             - containerPort: 8080
@@ -24,6 +22,8 @@ spec:
             - name: coms.service.uri
               value: "http://coms-customer-api:8080"
           imagePullPolicy: Always
+      imagePullSecrets:
+          - name: gitlabregcred
 ---
 apiVersion: v1
 kind: Service
