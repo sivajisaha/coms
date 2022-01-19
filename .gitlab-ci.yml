@@ -84,9 +84,8 @@ dockerBuild:
 deploy:
   stage: deploy
   image:
-    name: 
-      - bitnami/kubectl:latest
-      - docker:20
+    name: bitnami/kubectl:latest
+    name: docker:20
     entrypoint: [""]
   services:
     - docker:dind  
