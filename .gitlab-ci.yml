@@ -25,6 +25,7 @@ stages:
   - test
   - dockerBuild
 #  - sonarqube
+  - dockerlogin
   - deploy
   - helm
 
