@@ -81,6 +81,19 @@ dockerBuild:
     variables:
       - $task == "ci" || $task == "all"
 
+dockerlogin:
+  stage: dockerlogin
+  image: docker:20
+  services:
+    - docker:dind  
+  script:
+    - docker login registry.gitlab.com -u jucoms -p jucoms@1234
+  only:
+    refs:
+      - main
+    variables:
+      - $task == "cd" || $task == "all"
+
 deploy:
   stage: deploy
   image:
