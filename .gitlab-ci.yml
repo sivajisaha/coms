@@ -47,7 +47,7 @@ build:
     refs:
       - main
     variables:
-      - $TF_VAR_task == "ci" || $TF_VAR_task == "all"
+      - $task == "ci" || $task == "all"
 
 test:
   stage: test
@@ -63,7 +63,7 @@ test:
     refs:
       - main
     variables:
-      - $TF_VAR_task == "ci" || $TF_VAR_task == "all"  
+      - $task == "ci" || $task == "all"  
 
 dockerBuild:
   stage: dockerBuild
@@ -79,13 +79,17 @@ dockerBuild:
     refs:
       - main
     variables:
-      - $TF_VAR_task == "ci" || $TF_VAR_task == "all"
+      - $task == "ci" || $task == "all"
 
 deploy:
   stage: deploy
   image:
-    name: bitnami/kubectl:latest
+    name: 
+      - bitnami/kubectl:latest
+      - docker:20
     entrypoint: [""]
+  services:
+    - docker:dind  
   before_script:
     - docker login registry.gitlab.com -u jucoms -p jucoms@1234
   script:
@@ -98,7 +102,7 @@ deploy:
     refs:
       - main
     variables:
-      - $TF_VAR_task == "cd" || $TF_VAR_task == "all"
+      - $task == "cd" || $task == "all"
 
 helm:
   stage: helm
@@ -110,5 +114,5 @@ helm:
     refs:
       - main
     variables:
-      - $TF_VAR_task == "helm"
+      - $task == "helm"
  
