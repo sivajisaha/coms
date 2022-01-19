@@ -94,7 +94,7 @@ deploy:
 #    - docker login registry.gitlab.com -u jucoms -p jucoms@1234
   script:
     - kubectl config use-context jucoms/coms:coms-k8s
-    - kubectl create secret docker-registry gitlabregcred --docker-server=registry.gitlab.com --docker-username=jucoms --docker-password=jucoms@1234 --docker-email=snehashish.learning@gmail.com
+#    - kubectl create secret docker-registry gitlabregcred --docker-server=registry.gitlab.com --docker-username=jucoms --docker-password=jucoms@1234 --docker-email=snehashish.learning@gmail.com
     - kubectl apply -f deploy/postgres-deployment.yaml
     - kubectl apply -f deploy/coms-customer-api.yaml
     - kubectl apply -f deploy/coms-ui.yaml
