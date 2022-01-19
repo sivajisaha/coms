@@ -103,9 +103,9 @@ deploy:
     entrypoint: [""]
  # services:
  #   - docker:dind  
-  before_script:
-    - apt-get install docker-ce docker-ce-cli
-    - docker login registry.gitlab.com -u jucoms -p jucoms@1234
+#  before_script:
+#    - apt-get install docker-ce docker-ce-cli
+#    - docker login registry.gitlab.com -u jucoms -p jucoms@1234
   script:
     - kubectl config use-context jucoms/coms:coms-k8s
     - kubectl get pods
