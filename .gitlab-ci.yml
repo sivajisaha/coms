@@ -101,7 +101,8 @@ deploy:
 
 helm:
   stage: helm
-  image: lwolf/helm-kubectl-docker:v152_213
+#  image: lwolf/helm-kubectl-docker:v152_213
+  image: alpine/helm:3.2.1
   before_script:
 #    - mkdir -p /etc/deploy
     - kubectl config use-context jucoms/coms:coms-k8s
