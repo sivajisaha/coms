@@ -19,7 +19,7 @@ spec:
           - containerPort: 8080
         env:
           - name: coms.service.uri
-            value: "http://coms-customer-api:8080"
+            value: "http://coms-api:8080"
         imagePullPolicy: Always
       imagePullSecrets:
           - name: gitlabregcred
