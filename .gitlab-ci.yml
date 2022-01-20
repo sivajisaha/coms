@@ -110,8 +110,8 @@ helm:
 #    - helm repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com/
 #    - helm repo update
   script:
-#    - helm install COMS ./helm/charts --values=./helm/charts/values.yaml
-    - helm --help
+    - helm install COMS ./helm/charts --values=./helm/charts/values.yaml
+#    - helm --help
   only:
     refs:
       - main
