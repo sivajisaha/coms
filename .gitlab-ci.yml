@@ -105,12 +105,13 @@ helm:
   before_script:
 #    - mkdir -p /etc/deploy
     - kubectl config use-context jucoms/coms:coms-k8s
-    - helm init
+#    - helm init
 #    - helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 #    - helm repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com/
 #    - helm repo update
   script:
-    - helm upgrade COMS ./helm/charts --install --values=./helm/charts/values.yaml
+#    - helm upgrade COMS ./helm/charts --install --values=./helm/charts/values.yaml
+    - helm install COMS ./helm/charts --values ./helm/charts/values.yaml
 #    - helm --help
   only:
     refs:
