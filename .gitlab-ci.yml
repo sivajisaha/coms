@@ -16,9 +16,9 @@ image: docker:20
 # isolated from any previous builds.
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
-#  DOCKER_HOST: tcp://registry.gitlab.com/
-#  DOCKER_DRIVER: overlay2
-#  APP_NAME: coms
+  DOCKER_HOST: tcp://registry.gitlab.com/
+  DOCKER_DRIVER: overlay2
+  APP_NAME: coms
 
 before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
