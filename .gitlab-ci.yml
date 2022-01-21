@@ -16,9 +16,6 @@ image: docker:20
 # isolated from any previous builds.
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
-  DOCKER_HOST: tcp://registry.gitlab.com/
-  DOCKER_DRIVER: overlay2
-  APP_NAME: coms
 
 before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
@@ -97,26 +94,18 @@ deploy:
     refs:
       - main
     variables:
-      - $task == "cd" || $task == "all"
+      - $task == "k8s" || $task == "k8s"
 
 helm:
   stage: helm
-#  image: lwolf/helm-kubectl-docker:v152_213
   image: dtzar/helm-kubectl
   before_script:
-#    - mkdir -p /etc/deploy
     - kubectl config use-context jucoms/coms:coms-k8s
-#    - helm init
-#    - helm repo add stable https://kubernetes-charts.storage.googleapis.com/
-#    - helm repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com/
-#    - helm repo update
   script:
     - helm upgrade coms ./coms-helm --install --values=./coms-helm/values.yaml
-#    - helm install COMS ./helm/charts --values ./helm/charts/values.yaml
-#    - helm --help
   only:
     refs:
       - main
     variables:
-      - $task == "helm"
+      - $task == "helm" || $task == "all"
  
