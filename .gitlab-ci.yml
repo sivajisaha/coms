@@ -26,6 +26,7 @@ stages:
   - dockerBuild
   - deploy
   - helm
+  - dummy
 
 build:
   stage: build
@@ -108,4 +109,14 @@ helm:
       - main
     variables:
       - $task == "helm" || $task == "all"
+
+dummy:
+  stage: dummy
+  script:
+    - ls
+  only:
+    refs:
+      - main
+    variables:
+      - $task == "dummy"
  
