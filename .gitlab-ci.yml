@@ -101,8 +101,8 @@ deploy:
 
 helm:
   stage: helm
-#  image: lwolf/helm-kubectl-docker:v152_213
-  image: alpine/helm:3.2.1
+  image: lwolf/helm-kubectl-docker:v152_213
+#  image: alpine/helm:3.2.1
   before_script:
 #    - mkdir -p /etc/deploy
     - kubectl config use-context jucoms/coms:coms-k8s
@@ -111,8 +111,8 @@ helm:
 #    - helm repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com/
 #    - helm repo update
   script:
-#    - helm upgrade COMS ./helm/charts --install --values=./helm/charts/values.yaml
-    - helm install COMS ./helm/charts --values ./helm/charts/values.yaml
+    - helm upgrade coms ./coms-helm --install --values=./coms-helm/values.yaml
+#    - helm install COMS ./helm/charts --values ./helm/charts/values.yaml
 #    - helm --help
   only:
     refs:
