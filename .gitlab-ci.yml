@@ -102,10 +102,10 @@ deploy:
 helm:
   stage: helm
 #  image: lwolf/helm-kubectl-docker:v152_213
-  image: alpine/helm
+  image: dtzar/helm-kubectl
   before_script:
 #    - mkdir -p /etc/deploy
-#    - kubectl config use-context jucoms/coms:coms-k8s
+    - kubectl config use-context jucoms/coms:coms-k8s
 #    - helm init
 #    - helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 #    - helm repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com/
