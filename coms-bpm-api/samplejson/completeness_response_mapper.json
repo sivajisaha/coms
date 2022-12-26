@@ -1,0 +1,24 @@
+{
+	"source_json_schema": "",
+	"destination_json_schema":"",
+	"mappings":[
+		{
+			"mapping_type": "simple",
+			"source_node": "/transaction_status",
+			"destination_path": "/Workflow/completeness_check",
+			"destination_node": "transaction_status"
+		},
+		{
+			"mapping_type": "simple",
+			"source_node": "/response_message",
+			"destination_path": "/Workflow/completeness_check",
+			"destination_node": "response_message"
+		},
+		{
+			"mapping_type": "simple",
+			"source_node": "/response_status",
+			"destination_path": "/Workflow/completeness_check",
+			"destination_node": "response_status"
+		}
+]
+}

@@ -1,0 +1,107 @@
+gradlew build
+gradlew bootJar
+gradlew bootRun
+
+npm run build
+
+D:\software\kafka\kafka_2.13-3.2.1\bin\windows>zookeeper-server-start.bat D:\software\kafka\kafka_2.13-3.2.1\config\zookeeper.properties
+
+D:\software\kafka\kafka_2.13-3.2.1\bin\windows>kafka-server-start.bat D:\software\kafka\kafka_2.13-3.2.1\config\server.properties
+
+
+-----coms-bpm-api-------
+
+cd E:\code\coms\coms-bpm-api
+gradlew build
+
+docker build -t sivajisaha/coms-bpm-api:0.1 .
+docker push sivajisaha/coms-bpm-api:0.1
+
+kubectl apply -f ./coms-bpm-api.yaml
+minikube service coms-bpm-api --url
+kubectl port-forward service/coms-bpm-api 31082:8082
+
+kubectl delete deployments coms-bpm-api
+--kubectl delete services coms-bpm-api
+
+----------coms-client-----------------
+cd E:\code\coms\coms-client
+gradlew build
+docker build -t sivajisaha/coms-client:0.1 .
+docker push sivajisaha/coms-client:0.1
+kubectl apply -f ./coms-client.yaml
+minikube service coms-client --url
+kubectl port-forward service/coms-client 31081:8081
+
+kubectl delete deployments coms-client
+
+------------------coms-userservice-api--------------------------
+cd E:\code\coms\coms-userservice-api
+gradlew build
+docker build -t sivajisaha/coms-userservice-api:0.1 .
+docker push sivajisaha/coms-userservice-api:0.1
+kubectl apply -f ./coms-userservice-api.yaml
+minikube service coms-userservice-api --url
+kubectl port-forward service/coms-userservice-api 31085:8085
+
+kubectl delete deployments coms-userservice-api
+
+------------------coms-ui--------------------------
+cd E:\code\coms\coms-ui
+gradlew build
+docker build -t sivajisaha/coms-ui:0.1 .
+docker push sivajisaha/coms-ui:0.1
+kubectl apply -f ./coms-ui.yaml
+minikube service coms-ui --url
+kubectl port-forward service/coms-ui 31080:8080
+
+kubectl delete deployments coms-ui
+
+
+--------------------------------
+
+kubectl apply -f ./coms-ui.yaml
+kubectl delete -f ./coms-ui.yaml
+
+minikube service coms-ui --url
+
+kubectl delete deployments coms-ui
+kubectl delete services coms-ui
+
+------------------
+to start workflow
+
+{
+  "context": {
+    "processInstanceId": 0,
+    "processCode": "LOAN_PROCESS",
+    "version": "1",
+    "transactionCode": "",
+    "targetactionCode": ""
+  },
+  "data": ""
+}
+to trigger process that requires external intervention
+{
+  "context": {
+    "processInstanceId": 190,
+    "processCode": "",
+    "version": "",
+    "transactionCode": "CORRECTNESS_CHECK",
+    "targetactionCode": "COMPLETE"
+  },
+  "data": ""
+}
+to re-trigger process that failed
+{
+  "context": {
+    "processInstanceId": 190,
+    "processCode": "",
+    "version": "",
+    "transactionCode": "CORRECTNESS_CHECK",
+    "targetactionCode": "TRIGGER"
+  },
+  "data": ""
+}
+
+"{""process_code"":""LOAN_PROCESS"",""start_event"":""LOAN_SUBMISSION"",""activities"":[{""activity_code"":""COMPLETENESS_CHECK"",""handler_type"":""AUTOMATED"",""handler_url"":""http://localhost:8081/loan/check_completeness"",""handler_data"":"""",""assignment"":[],""next_element_code"":""CORRECTNESS_CHECK""},{""activity_code"":""CORRECTNESS_CHECK"",""handler_type"":""EXTERNAL"",""handler_url"":""http://localhost:8081/loan/check_correctness"",""handler_data"":"""",""assignment"":[],""next_element_code"":""UNDERWRITE_1""},{""activity_code"":""VALIDATE_BORROWER"",""handler_type"":""AUTOMATED"",""handler_url"":""http://localhost:8081/loan/validate_borrower"",""handler_data"":"""",""assignment"":[],""next_element_code"":""UNDERWRITE_2""},{""activity_code"":""VALIDATE_PROPERTY"",""handler_type"":""AUTOMATED"",""handler_url"":""http://localhost:8081/loan/validate_property"",""handler_data"":"""",""assignment"":[],""next_element_code"":""UNDERWRITE_3""},{""activity_code"":""EMPLOYEMENT_CHECK"",""handler_type"":""AUTOMATED"",""handler_url"":""http://localhost:8081/loan/employment_check"",""handler_data"":"""",""assignment"":[],""next_element_code"":""UNDERWRITE_3""},{""activity_code"":""CREDIT_CHECK"",""handler_type"":""AUTOMATED"",""handler_url"":""http://localhost:8081/loan/credit_check"",""handler_data"":"""",""assignment"":[],""next_element_code"":""UNDERWRITE_3""},{""activity_code"":""ALL_CHECKS_DONE"",""handler_type"":""AUTOMATED"",""handler_url"":""http://localhost:8081/loan/all_checks_done"",""handler_data"":"""",""assignment"":[],""next_element_code"":""AUTOMATIC_DECISION""},{""activity_code"":""AUTOMATIC_DECISION"",""handler_type"":""AUTOMATED"",""handler_url"":""http://localhost:8081/loan/automatic_decision"",""handler_data"":"""",""assignment"":[],""next_element_code"":""REVIEW_RESULT""},{""activity_code"":""REVIEW_RESULT"",""handler_type"":""AUTOMATED"",""handler_url"":""http://localhost:8081/loan/review_result"",""handler_data"":"""",""assignment"":[],""next_element_code"":""NOTIFY_CUSTOMER""},{""activity_code"":""NOTIFY_CUSTOMER"",""handler_type"":""AUTOMATED"",""handler_url"":""http://localhost:8081/loan/notify_customer"",""handler_data"":"""",""assignment"":[],""next_element_code"":""""}],""events"":[{""event_code"":""LOAN_SUBMISSION"",""handler_type"":""AUTOMATED"",""handler_data"":"""",""assignment"":[],""next_element_code"":""COMPLETENESS_CHECK""}],""gateways"":[{""gateway_code"":""UNDERWRITE_1"",""input_elements"":[""CORRECTNESS_CHECK""],""output_elements"":[""VALIDATE_BORROWER"",""VALIDATE_PROPERTY""],""gateway_type"":""SPLITTER""},{""gateway_code"":""UNDERWRITE_2"",""input_elements"":[""VALIDATE_BORROWER""],""output_elements"":[""EMPLOYEMENT_CHECK"",""CREDIT_CHECK""],""gateway_type"":""SPLITTER""},{""gateway_code"":""UNDERWRITE_3"",""input_elements"":[""VALIDATE_PROPERTY"",""EMPLOYEMENT_CHECK"",""CREDIT_CHECK""],""output_elements"":[""ALL_CHECKS_DONE""],""gateway_type"":""AND""}]}"

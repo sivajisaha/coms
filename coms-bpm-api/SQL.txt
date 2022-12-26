@@ -1,0 +1,108 @@
+-----------------
+
+CREATE TABLE bpm_process_definition (
+    id  SERIAL PRIMARY KEY,
+    code varchar(200) NOT NULL,
+	version varchar(200),
+    definition text,
+	description varchar(5000),
+	status varchar(200)
+);
+
+
+CREATE TABLE bpm_process_instance (
+    id  SERIAL PRIMARY KEY,
+    process_definition_id integer NOT NULL,
+	status varchar(50)
+);
+
+CREATE TABLE bpm_process_instance_element (
+    id  SERIAL PRIMARY KEY,
+    process_instance_id integer NOT NULL,
+	element_code varchar(200) NOT NULL,
+	element_title varchar(300),
+	element_type varchar(200) NOT NULL,
+	gateway_type varchar(50),
+	handler_type varchar(200),
+	handler_url varchar(300),
+	rule_outcomes text,
+	message_converter_url varchar(300),
+	sequence integer,
+	input_elements varchar(500),
+	output_elements varchar(500),
+	request_processor_schema varchar(200),
+	response_processor_schema text,
+	status varchar(50),
+	handled_message text,
+	request_message text,
+	response_message text,
+	user_notes text,
+	transaction_log text,
+	last_transaction timestamp 
+);
+
+
+CREATE TABLE bpm_process_failed_instance_element (
+    id  SERIAL PRIMARY KEY,
+    process_instance_id integer NOT NULL,
+	element_code varchar(200) NOT NULL
+);
+CREATE TABLE bpm_process_json_repo (
+    id  SERIAL PRIMARY KEY,
+    process_definition_id integer NOT NULL,
+	schema_name varchar(1000) NOT NULL,
+	schema_category varchar(200) NOT NULL,
+	schema_definition text
+);
+CREATE TABLE bpm_process_task_assignment (
+    id  SERIAL PRIMARY KEY,
+	process_definition_id integer,
+   	task_code varchar(50),
+	task_assignment_entity_id integer NOT NULL,
+	task_assignment_entity_type varchar(10)
+);
+
+	grant all privileges on database coms_db to comsdbuser ;
+	GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO comsdbuser;
+	GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO comsdbuser;
+CREATE TABLE config_settings (
+    id  SERIAL PRIMARY KEY,
+	app_code varchar(100) NOT NULL,
+	config_type varchar(100) NOT NULL,
+    key varchar(100) NOT NULL,
+	key_value varchar(500)
+);
+
+CREATE TABLE users (
+    user_id  SERIAL PRIMARY KEY,
+    first_name varchar(100) NOT NULL,
+	middle_name varchar(100),
+	last_name varchar(100) NOT NULL,
+    email varchar(200)NOT NULL,
+	login_id varchar(100)NOT NULL,
+	password varchar(100)
+);
+CREATE TABLE field_data (
+    field_id  SERIAL PRIMARY KEY,
+    form_id integer NOT NULL,
+    field_name varchar(60) NOT NULL,
+    field_type varchar(40) NOT NULL,
+    field_label varchar(100) NOT NULL,
+	display_sequence int,
+	default_value varchar(1000),
+	parent_container varchar(60)
+);
+CREATE TABLE groups (
+    group_id  SERIAL PRIMARY KEY,
+    group_name varchar(100) NOT NULL,
+	description varchar(1000)
+);
+
+CREATE TABLE tenant_master (
+    tenant_id  SERIAL PRIMARY KEY,
+    tenant_name varchar(60) NOT NULL,
+    tenant_description varchar(1000)
+);
+
+drop table public.bpm_process_instance_element;
+drop table public.bpm_process_instance_definition;

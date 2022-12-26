@@ -1,0 +1,115 @@
+gradlew build
+gradlew bootJar
+gradlew bootRun
+java -jar coms-customer-api-0.0.1-SNAPSHOT.jar
+CREATE TABLE customer (
+    customer_id  SERIAL PRIMARY KEY,
+    account_number varchar(40) NOT NULL,
+    first_name varchar(40) NOT NULL,
+    last_name varchar(40) NOT NULL,
+    company_name varchar(40) NOT NULL,
+	bill_to_id integer,
+	ship_to_id integer
+);
+CREATE TABLE field_data (
+    field_id  SERIAL PRIMARY KEY,
+    form_id integer NOT NULL,
+    field_name varchar(60) NOT NULL,
+    field_type varchar(40) NOT NULL,
+    field_label varchar(100) NOT NULL,
+	display_sequence int,
+	default_value varchar(1000),
+	parent_container varchar(60)
+);
+grant all privileges on database coms_db to comsdbuser ;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO comsdbuser;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO comsdbuser;
+--------------------------------
+--------------------------------------------
+cd E:\code\coms\coms-ui
+
+docker build -t sivajisaha/coms-ui:0.1 .
+docker push sivajisaha/coms-ui:0.1
+
+--------------------------------
+
+kubectl apply -f ./coms-ui.yaml
+kubectl delete -f ./coms-ui.yaml
+
+minikube service coms-ui --url
+
+kubectl delete deployments coms-ui
+kubectl delete services coms-ui
+
+----------------------------------
+
+kubectl apply -f ./coms-customer-api.yaml
+kubectl delete -f ./coms-customer-api.yaml
+
+minikube service coms-customer-api --url
+kubectl delete deployments coms-customer-api
+kubectl delete services coms-customer-api
+------------------
+
+CREATE TABLE bpm_process_defintion (
+    id  SERIAL PRIMARY KEY,
+    code varchar(200) NOT NULL,
+    definition varchar(5000),
+	description varchar(5000),
+	status varchar(200),
+	version varchar(200)
+);
+
+
+
+CREATE TABLE process_master (
+    process_id  SERIAL PRIMARY KEY,
+    process_title varchar(200) NOT NULL,
+    process_desciption varchar(2000),
+	process_status_id int,
+	start_task_id int,
+	end_task_id int
+);
+
+CREATE TABLE users (
+    user_id  SERIAL PRIMARY KEY,
+    first_name varchar(100) NOT NULL,
+	middle_name varchar(100),
+	last_name varchar(100) NOT NULL,
+    email varchar(200)NOT NULL,
+	login_id varchar(100)NOT NULL,
+	password varchar(100)
+);
+
+CREATE TABLE groups (
+    group_id  SERIAL PRIMARY KEY,
+    group_name varchar(100) NOT NULL,
+	description varchar(1000)
+);
+
+CREATE TABLE tenant_master (
+    tenant_id  SERIAL PRIMARY KEY,
+    tenant_name varchar(60) NOT NULL,
+    tenant_description varchar(1000)
+);
+
+------
+insert into public.bpm_process_instance(process_definition_id,status) 
+	values((select id from bpm_process_defintion where code ='LOAN_PROCESS' and version='1'),'ACTIVE')
+
+select id,code,version,definition,description,status from public.bpm_process_defintion
+select * from public.bpm_process_element_instance
+select * from public.bpm_process_instance
+select * from public.bpm_process_defintion
+select id, process_instance_id,element_code,element_type, handler_type,handler_data,handler_url,input_elements,output_elements,status from public.bpm_process_element_instance where process_instance_id = 127 and element_code = 'LOAN_SUBMISSION'
+delete from public.bpm_process_instance;
+delete from public.bpm_process_element_instance;
+delete from public.bpm_process_defintion
+select id,process_instance_id,element_code,element_type,handler_type,sequence,handler_data,handler_url,input_elements,output_elements,status from public.bpm_process_element_instance where process_instance_id =201 order by sequence
+
+update public.bpm_process_element_instance set status='' where process_instance_id = 87 and element_code = 'COMPLETENESS_CHECK'
+
+
+insert into public.bpm_process_instance(process_definition_id,status) 
+values((select id from bpm_process_defintion where code ='LOAN_PROCESS' and version='3'),'ACTIVE')
+

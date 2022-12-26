@@ -1,0 +1,38 @@
+{
+  "conditions": {
+    "all": [
+      {
+        "all": [
+          {
+            "fact": "employment_check",
+            "operator": "equal",
+            "value": "true"
+          }
+        ]
+      },
+      {
+        "all": [
+          {
+            "fact": "credit_check",
+            "operator": "equal",
+            "value": "true"
+          }
+        ]
+      },
+      {
+        "all": [
+          {
+            "fact": "validate_property",
+            "operator": "equal",
+            "value": "true"
+          }
+        ]
+      }
+    ]
+  },
+  "facts": {
+    "employment_check": true,
+    "credit_check": true,
+    "validate_property": true
+  }
+}

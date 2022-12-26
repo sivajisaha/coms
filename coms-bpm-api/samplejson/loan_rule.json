@@ -1,0 +1,41 @@
+{
+  "conditions": {
+    "all": [
+      {
+        "all": [
+          {
+            "fact_datatype": "string",
+            "fact": "employment_check",
+            "operator": "equal",
+            "value": "pass"
+          }
+        ]
+      },
+      {
+        "all": [
+          {
+            "fact_datatype": "string",
+            "fact": "credit_check",
+            "operator": "equal",
+            "value": "pass"
+          }
+        ]
+      },
+      {
+        "all": [
+          {
+            "fact_datatype": "string",
+            "fact": "property_check",
+            "operator": "equal",
+            "value": "pass"
+          }
+        ]
+      }
+    ]
+  },
+  "facts": {
+    "employment_check": "pass",
+    "credit_check": "pass",
+    "property_check": "pass"
+  }
+}

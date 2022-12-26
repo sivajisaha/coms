@@ -1,5 +1,0 @@
-applicationName: coms
-imageRegistry: "registry.gitlab.com/jucoms/coms"
-dockerTag: "latest"
-pullPolicy: "Always"
-storage: "s3"

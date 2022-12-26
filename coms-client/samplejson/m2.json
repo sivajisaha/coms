@@ -1,0 +1,79 @@
+{
+  "SubmitApplicationRequest": {
+    "SubHeader": {
+      "requestUUID": "ABC123",
+      "serviceRequestId": "OpenAPI",
+      "serviceRequestVersion": "1.0",
+      "channelId": "API"
+    },
+    "SubmitApplicationRequestBody": {
+      "SubmitApplicationRootData": {
+        "sourceReferenceId": "test1234",
+        "productCode": "PERSONAL",
+        "userIdentifier": {
+          "phoneNumber": {
+            "countryCode": "91",
+            "nationalNumber": "989898**98"
+          },
+          "dateOfBirth": "1973-03-26"
+        },
+        "user": {
+          "displayName": "displayName",
+          "emailAddress": "sample123@abc.com",
+          "dateOfBirth": "1999-02-12",
+          "pan": "ABC**1234P",
+          "addresses": {
+            "companyName": "Axis Bank",
+            "addressLine1": "Flat No 10/2665",
+            "addressLine2": "JUHU",
+            "addressLine3": "MUMBAI",
+            "landmark": "OPPOSITE RUSTAMJEE ELEMENTS",
+            "postalCode": "404040",
+            "city": "Mumbai",
+            "country": "India",
+            "state": "Maharashtra",
+            "addressTags": [
+              "RESIDENTIAL_ADDRESS"
+            ]
+          }
+        },
+        "tncAcceptanceMetadata": [
+          {
+            "type": "CIBIL",
+            "acceptance": true
+          },
+          {
+            "type": "DND",
+            "acceptance": true
+          }
+        ],
+        "addressChange": "true",
+        "employerDetails": {
+          "employerId": "243",
+          "employerInfo": "Axis Bank"
+        },
+        "applicationDetails": {
+          "selectedLoanOffer": {
+            "details": {
+              "loanAmount": 600000,
+              "tenure": 60,
+              "emi": 15233,
+              "interestRate": 17.99,
+              "tenureLabel": "Years"
+            },
+            "breakdown": [
+              {
+                "name": "processing_fee",
+                "value": 14160
+              },
+              {
+                "name": "stamp_duty",
+                "value": 610
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

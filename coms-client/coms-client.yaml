@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coms-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: coms-client
+  template:
+    metadata:
+      labels:
+        app: coms-client
+    spec:
+      containers:
+        - name: coms-client
+          image: sivajisaha/coms-client:0.1
+          ports:
+            - containerPort: 8081
+          env:
+            - name: spring.datasource.url
+              value: "jdbc:postgresql://192.168.0.133:5432/coms_db"
+            - name: coms.bpmservice.uri
+              value: "http://coms-bpm-api:8082"
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: coms-client
+spec:
+  type: NodePort
+  selector:
+    app: coms-client
+  ports:
+    - port: 8081
+      targetPort: 8081
+      nodePort: 31081

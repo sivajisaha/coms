@@ -1,0 +1,24 @@
+{
+  "source_json_schema": "",
+  "destination_json_schema": "loan_rule.json",
+  "mappings": [
+    {
+      "mapping_type": "simple",
+      "source_node": "/Workflow/credit_check/transaction_status",
+      "destination_path": "/facts",
+      "destination_node": "credit_check"
+    },
+    {
+      "mapping_type": "simple",
+      "source_node": "/Workflow/employment_check/transaction_status",
+      "destination_path": "/facts",
+      "destination_node": "employment_check"
+    },
+    {
+      "mapping_type": "simple",
+      "source_node": "/Workflow/property_check/transaction_status",
+      "destination_path": "/facts",
+      "destination_node": "property_check"
+    }
+  ]
+}

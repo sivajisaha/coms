@@ -1,0 +1,48 @@
+{
+	"source_json_schema": "",
+	"destination_json_schema":"loan_workflow.json",
+	"mappings":[
+	{
+		"mapping_type":"simple",
+		"source_node":"/loan_type",
+		"destination_path":"/SubmitApplicationRequest/SubmitApplicationRequestBody/SubmitApplicationRootData",
+		"destination_node":"productCode"
+	},
+	{
+		"mapping_type":"simple",
+		"source_node":"/loan_amount",
+		"destination_path":"/SubmitApplicationRequest/SubmitApplicationRequestBody/SubmitApplicationRootData/applicationDetails/selectedLoanOffer/details",
+		"destination_node":"loanAmount"
+	},
+	{
+		"mapping_type":"simple",
+		"source_node":"/loan_duration",
+		"destination_path":"/SubmitApplicationRequest/SubmitApplicationRequestBody/SubmitApplicationRootData/applicationDetails/selectedLoanOffer/details",
+		"destination_node":"tenure"
+	},
+	{
+		"mapping_type":"simple",
+		"source_node":"/first_name",
+		"destination_path":"/SubmitApplicationRequest/SubmitApplicationRequestBody/SubmitApplicationRootData/user",
+		"destination_node":"displayName"
+	},
+	{
+		"mapping_type":"simple",
+		"source_node":"/email_id",
+		"destination_path":"/SubmitApplicationRequest/SubmitApplicationRequestBody/SubmitApplicationRootData/user",
+		"destination_node":"emailAddress"
+	},
+	{
+		"mapping_type":"simple",
+		"source_node":"/mobile_no",
+		"destination_path":"/SubmitApplicationRequest/SubmitApplicationRequestBody/SubmitApplicationRootData/userIdentifier/phoneNumber",
+		"destination_node":"nationalNumber"
+	},
+	{
+		"mapping_type":"simple",
+		"source_node":"/home_address",
+		"destination_path":"/SubmitApplicationRequest/SubmitApplicationRequestBody/SubmitApplicationRootData/user/addresses",
+		"destination_node":"addressLine1"
+	}
+]
+}

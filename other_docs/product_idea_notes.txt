@@ -1,0 +1,19 @@
+Task
+- human task
+- service task
+- call activity
+- script task
+- send task
+- receive task
+
+Iteration
+- multi-instantiation
+- loops
+Gateways
+- parallel
+- exclusive
+- inclusive
+
+
+Event
+

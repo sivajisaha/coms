@@ -3,3 +3,5 @@
 **/bin
 **/.gradle
 **/.settings
+./other_docs
+./coms-reactui/node_modules

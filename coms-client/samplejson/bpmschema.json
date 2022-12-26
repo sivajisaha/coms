@@ -1,0 +1,131 @@
+{
+  "process_code": "LOAN_PROCESS",
+  "start_event": "LOAN_SUBMISSION",
+  "activities": [
+    {
+      "activity_code": "COMPLETENESS_CHECK",
+      "handler_type": "automated",
+      "handler_url": "",
+      "handler_data": "",
+      "assignment": [],
+      "next_element_code": "CORRECTNESS_CHECK"
+    },
+    {
+      "activity_code": "CORRECTNESS_CHECK",
+      "handler_type": "automated",
+      "handler_url": "",
+      "handler_data": "",
+      "assignment": [],
+      "next_element_code": "UNDERWRITE_1"
+    },
+    {
+      "activity_code": "VALIDATE_BORROWER",
+      "handler_type": "automated",
+      "handler_url": "",
+      "handler_data": "",
+      "assignment": [],
+      "next_element_code": "UNDERWRITE_2"
+    },
+    {
+      "activity_code": "VALIDATE_PROPERTY",
+      "handler_type": "automated",
+      "handler_url": "",
+      "handler_data": "",
+      "assignment": [],
+      "next_element_code": "UNDERWRITE_3"
+    },
+    {
+      "activity_code": "EMPLOYEMENT_CHECK",
+      "handler_type": "automated",
+      "handler_url": "",
+      "handler_data": "",
+      "assignment": [],
+      "next_element_code": "UNDERWRITE_3"
+    },
+    {
+      "activity_code": "CREDIT_CHECK",
+      "handler_type": "automated",
+      "handler_url": "",
+      "handler_data": "",
+      "assignment": [],
+      "next_element_code": "UNDERWRITE_3"
+    },
+    {
+      "activity_code": "ALL_CHECKS_DONE",
+      "handler_type": "automated",
+      "handler_url": "",
+      "handler_data": "",
+      "assignment": [],
+      "next_element_code": "AUTOMATIC_DECISION"
+    },
+    {
+      "activity_code": "AUTOMATIC_DECISION",
+      "handler_type": "automated",
+      "handler_url": "",
+      "handler_data": "",
+      "assignment": [],
+      "next_element_code": "REVIEW_RESULT"
+    },
+    {
+      "activity_code": "REVIEW_RESULT",
+      "handler_type": "human",
+      "handler_url": "",
+      "handler_data": "",
+      "assignment": [],
+      "next_element_code": "NOTIFY_CUSTOMER"
+    },
+    {
+      "activity_code": "NOTIFY_CUSTOMER",
+      "handler_type": "automated",
+      "handler_url": "",
+      "handler_data": "",
+      "assignment": [],
+      "next_element_code": ""
+    }
+  ],
+  "events": [
+    {
+      "event_code": "LOAN_SUBMISSION",
+      "handler_type": "automated",
+      "handler_data": "",
+      "assignment": [],
+      "next_element_code": "COMPLETENESS_CHECK"
+    }
+  ],
+  "gateways": [
+    {
+      "gateway_code": "UNDERWRITE_1",
+      "input_elements": [
+        "CORRECTNESS_CHECK"
+      ],
+      "output_elements": [
+        "VALIDATE_BORROWER",
+        "VALIDATE_PROPERTY"
+      ],
+      "gateway_type": "SPLITTER"
+    },
+    {
+      "gateway_code": "UNDERWRITE_2",
+      "input_elements": [
+        "VALIDATE_BORROWER"
+      ],
+      "output_elements": [
+        "EMPLOYEMENT_CHECK",
+        "CREDIT_CHECK"
+      ],
+      "gateway_type": "SPLITTER"
+    },
+    {
+      "gateway_code": "UNDERWRITE_3",
+      "input_elements": [
+        "VALIDATE_PROPERTY",
+        "EMPLOYEMENT_CHECK",
+        "CREDIT_CHECK"
+      ],
+      "output_elements": [
+        "ALL_CHECKS_DONE"
+      ],
+      "gateway_type": "AND"
+    }
+  ]
+}

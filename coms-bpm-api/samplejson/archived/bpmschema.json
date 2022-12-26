@@ -1,0 +1,153 @@
+{
+  "process_code": "LOAN_PROCESS",
+  "start_event": "LOAN_SUBMISSION",
+  "proxy_endpoint": "http://localhost:8081",
+  "activities": [
+    {
+      "activity_code": "COMPLETENESS_CHECK",
+      "activity_title": "Check completeness",
+      "handler_type": "AUTOMATED",
+      "handler_url": "/loan/completeness_check",
+      "message_converter_url": "",
+      "request_processor_schema": "",
+      "response_processor_schema": "completeness_response_mapper.json",
+      "assignment": [],
+      "next_element_code": "CORRECTNESS_CHECK"
+    },
+    {
+      "activity_code": "CORRECTNESS_CHECK",
+      "activity_title": "Check correctness",
+      "handler_type": "EXTERNAL",
+      "handler_url": "/loan/correctness_check",
+      "message_converter_url": "",
+      "request_processor_schema": "",
+      "response_processor_schema": "correctness_response_mapper.json",
+      "assignment": [],
+      "next_element_code": "GATEWAY_BORROWER_CHECK"
+    },
+    {
+      "activity_code": "PROPERTY_CHECK",
+      "activity_title": "Check property",
+      "handler_type": "EXTERNAL",
+      "handler_url": "/loan/property_check",
+      "message_converter_url": "",
+      "request_processor_schema": "",
+      "response_processor_schema": "property_check_response_mapper.json",
+      "assignment": [],
+      "next_element_code": "GATEWAY_AGGREGATE_BORROWER_CHECK_OUTCOME"
+    },
+    {
+      "activity_code": "EMPLOYMENT_CHECK",
+      "activity_title": "Check employment",
+      "handler_type": "AUTOMATED",
+      "handler_url": "/loan/employment_check",
+      "message_converter_url": "",
+      "request_processor_schema": "",
+      "response_processor_schema": "employment_check_response_mapper.json",
+      "assignment": [],
+      "next_element_code": "GATEWAY_AGGREGATE_BORROWER_CHECK_OUTCOME"
+    },
+    {
+      "activity_code": "CREDIT_CHECK",
+      "activity_title": "Check credit",
+      "handler_type": "AUTOMATED",
+      "handler_url": "/loan/credit_check",
+      "message_converter_url": "",
+      "request_processor_schema": "",
+      "response_processor_schema": "credit_check_response_mapper.json",
+      "assignment": [],
+      "next_element_code": "GATEWAY_AGGREGATE_BORROWER_CHECK_OUTCOME"
+    },
+    {
+      "activity_code": "REVIEW_RESULT",
+      "activity_title": "Review result",
+      "handler_type": "EXTERNAL",
+      "handler_url": "/loan/review_result",
+      "message_converter_url": "",
+      "request_processor_schema": "",
+      "response_processor_schema": "review_result_response_mapper.json",
+      "assignment": [],
+      "next_element_code": "NOTIFY_CUSTOMER"
+    },
+    {
+      "activity_code": "NOTIFY_CUSTOMER",
+      "activity_title": "Notify customer",
+      "handler_type": "AUTOMATED",
+      "handler_url": "/loan/notify_customer",
+      "message_converter_url": "",
+      "request_processor_schema": "",
+      "response_processor_schema": "notify_customer_response_mapper.json",
+      "assignment": [],
+      "next_element_code": ""
+    }
+  ],
+  "events": [
+    {
+      "event_code": "LOAN_SUBMISSION",
+      "event_title": "Loan submission",
+      "handler_type": "AUTOMATED",
+      "message_converter_url": "",
+      "assignment": [],
+      "request_processor_schema": "",
+      "response_processor_schema": "loan_application_to_completeness_check_mapper.json",
+      "next_element_code": "COMPLETENESS_CHECK"
+    }
+  ],
+  "gateways": [
+    {
+      "gateway_code": "GATEWAY_BORROWER_CHECK",
+      "gateway_title": "Borrower check",
+      "message_converter_url": "",
+      "input_elements": [
+        "CORRECTNESS_CHECK"
+      ],
+      "output_elements": [
+        "CREDIT_CHECK",
+        "PROPERTY_CHECK",
+        "EMPLOYMENT_CHECK"
+      ],
+      "gateway_type": "SPLITTER",
+      "request_processor_schema": "",
+      "response_processor_schema": ""
+    },
+    {
+      "gateway_code": "GATEWAY_AGGREGATE_BORROWER_CHECK_OUTCOME",
+      "gateway_title": "Aggregate borrower check outcome",
+      "message_converter_url": "",
+      "input_elements": [
+        "PROPERTY_CHECK",
+        "EMPLOYMENT_CHECK",
+        "CREDIT_CHECK"
+      ],
+      "output_elements": [
+        "AUTOMATED_DECISION"
+      ],
+      "gateway_type": "AND",
+      "request_processor_schema": "",
+      "response_processor_schema": "[{\"input_element\":\"PROPERTY_CHECK\",\"mapper_schema\":\"property_check_to_underwrite3_mapper.json\"},{\"input_element\":\"EMPLOYMENT_CHECK\",\"mapper_schema\":\"employment_check_to_underwrite3_mapper.json\"},{\"input_element\":\"CREDIT_CHECK\",\"mapper_schema\":\"credit_check_to_underwrite3_mapper.json\"}]"
+    }
+  ],
+  "rules": [
+    {
+      "rule_code": "AUTOMATED_DECISION",
+      "rule_title": "Automated decision",
+      "message_converter_url": "",
+      "rule_outcomes": [
+        {
+          "outcome": "true",
+          "outcome_message": "validation succeeded",
+          "next_element_code": "REVIEW_RESULT",
+          "movement_type": "forward"
+        },
+        {
+          "outcome": "false",
+          "outcome_message": "validation failed",
+          "next_element_code": "NOTIFY_CUSTOMER",
+          "movement_type": "forward"
+        }
+      ],
+      "request_processor_schema": "automated_decision_fact_mapper.json",
+      "response_processor_schema": ""
+    }
+  ]
+}

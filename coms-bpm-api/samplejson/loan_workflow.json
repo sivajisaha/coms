@@ -1,0 +1,129 @@
+{
+  "SubmitApplicationRequest": {
+    "SubHeader": {
+      "requestUUID": "",
+      "serviceRequestId": "OpenAPI",
+      "serviceRequestVersion": "1.0",
+      "channelId": "API"
+    },
+    "SubmitApplicationRequestBody": {
+      "SubmitApplicationRootData": {
+        "sourceReferenceId": "",
+        "productCode": "",
+        "userIdentifier": {
+          "phoneNumber": {
+            "countryCode": "91",
+            "nationalNumber": ""
+          },
+          "dateOfBirth": ""
+        },
+        "user": {
+          "displayName": "",
+          "emailAddress": "",
+          "dateOfBirth": "",
+          "pan": "",
+          "addresses": {
+            "companyName": "",
+            "addressLine1": "",
+            "addressLine2": "",
+            "addressLine3": "",
+            "landmark": "",
+            "postalCode": "",
+            "city": "",
+            "country": "",
+            "state": "",
+            "addressTags": [
+              ""
+            ]
+          }
+        },
+        "tncAcceptanceMetadata": [
+          {
+            "type": "CIBIL",
+            "acceptance": true
+          },
+          {
+            "type": "DND",
+            "acceptance": true
+          }
+        ],
+        "addressChange": "true",
+        "employerDetails": {
+          "employerId": "",
+          "employerInfo": ""
+        },
+        "applicationDetails": {
+          "selectedLoanOffer": {
+            "details": {
+              "loanAmount": "",
+              "tenure": "",
+              "emi": "",
+              "interestRate": "",
+              "tenureLabel": "Months"
+            },
+            "breakdown": [
+              {
+                "name": "processing_fee",
+                "value": ""
+              },
+              {
+                "name": "stamp_duty",
+                "value": ""
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+"Workflow": {
+  "completeness_check": {
+    "owner": "",
+    "response_status": "",
+    "transaction_status": "",
+    "response_message": ""
+  },
+  "correctness_check": {
+    "owner": "",
+    "response_status": "",
+    "transaction_status": "",
+    "response_message": ""
+  },
+  "property_check": {
+    "owner": "",
+    "response_status": "",
+    "transaction_status": "",
+    "response_message": ""
+  },
+  "employment_check": {
+    "owner": "",
+    "response_status": "",
+    "transaction_status": "",
+    "response_message": ""
+  },
+  "credit_check": {
+    "owner": "",
+    "response_status": "",
+    "transaction_status": "",
+    "response_message": ""
+  },
+		"automatic_decision":
+		{
+			"status":"",
+			"owner":"",
+			"outcome":""
+		},
+  "review_result": {
+    "owner": "",
+    "response_status": "",
+    "transaction_status": "",
+    "response_message": ""
+  },
+  "notify_customer": {
+    "owner": "",
+    "response_status": "",
+    "transaction_status": "",
+    "response_message": ""
+  }
+	}
+}

@@ -1,2 +1,2 @@
 rootProject.name = 'coms'
-include('coms-api', 'coms-ui', 'coms-common')
+include('coms-client', 'coms-userservice-api','coms-ui', 'coms-bpm-api')

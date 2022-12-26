@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coms-userservice-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: coms-userservice-api
+  template:
+    metadata:
+      labels:
+        app: coms-userservice-api
+    spec:
+      containers:
+        - name: coms-userservice-api
+          image: sivajisaha/coms-userservice-api:0.1
+          ports:
+            - containerPort: 8085
+          env:
+            - name: spring.datasource.url
+              value: "jdbc:postgresql://192.168.0.133:5432/coms_db"
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: coms-userservice-api
+spec:
+  type: NodePort
+  selector:
+    app: coms-userservice-api
+  ports:
+    - port: 8085
+      targetPort: 8085
+      nodePort: 31085
